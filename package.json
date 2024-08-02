@@ -1,0 +1,11 @@
+{
+  "name": "doctunis_backend",
+  "version": "1.0.0",
+  "description": "Backend pour le projet de classe DocTunis",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mohamed Sangaré",
+  "license": "ISC"
+}
