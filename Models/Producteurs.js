@@ -25,4 +25,4 @@ ProducteurSchema.plugin(uniqueValidator);
 
 const Producteurs = mongoose.model("Producteurs", ProducteurSchema);
 
-export default Producteurs;
+export default Producteurs; 
