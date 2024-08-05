@@ -13,8 +13,13 @@ const planningSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  film: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Films",
+    required: true,
+  },
 });
 
-const Planning = mongoose.model("Planning", planningSchema);
+const Planning = mongoose.model("Plannings", planningSchema);
 
 export default Planning;
