@@ -8,6 +8,7 @@ import realisateursRoutes from "./Routes/realisateursRoutes.js";
 import producteursRoutes from "./Routes/producteursRoutes.js";
 import planningsRoutes from "./Routes/planningsRoutes.js";
 import membreJurysRoutes from "./Routes/membreJurysRoutes.js";
+import noteRoutes from "./Routes/noteRoutes.js";
 
 const urlApi = "/api/v1";
 
@@ -32,5 +33,7 @@ app.use(`${urlApi}/producteurs`, producteursRoutes);
 app.use(`${urlApi}/plannings`, planningsRoutes);
 
 app.use(`${urlApi}/membre-jurys`, membreJurysRoutes);
+
+app.use(`${urlApi}/notes`, noteRoutes);
 
 export default app;

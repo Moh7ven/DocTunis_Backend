@@ -67,7 +67,8 @@ export const getAllFilms = async (req, res) => {
   try {
     const films = await Films.find()
       .populate("realisateur")
-      .populate("producteur");
+      .populate("producteur")
+      .populate("note");
     res.status(200).json(films);
   } catch (error) {
     console.error(error);

@@ -41,6 +41,7 @@ export const createPlanning = async (req, res) => {
       populate: [
         { path: "producteur", model: "Producteurs" },
         { path: "realisateur", model: "Realisateurs" },
+        { path: "note", model: "Notes" },
       ],
     });
 
@@ -66,6 +67,7 @@ export const getAllPlannings = async (req, res) => {
       populate: [
         { path: "producteur", model: "Producteurs" },
         { path: "realisateur", model: "Realisateurs" },
+        { path: "note", model: "Notes" },
       ],
     });
 
@@ -92,6 +94,7 @@ export const getPlanningById = async (req, res) => {
       populate: [
         { path: "producteur", model: "Producteurs" },
         { path: "realisateur", model: "Realisateurs" },
+        { path: "note", model: "Notes" },
       ],
     });
     if (!planning) {
@@ -204,4 +207,3 @@ export const deletePlanning = async (req, res) => {
     });
   }
 };
-
