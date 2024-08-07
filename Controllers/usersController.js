@@ -136,3 +136,24 @@ export const getAllUsers = async (req, res) => {
       .json({ message: "Une erreur s'est produite", status: false });
   }
 };
+
+export const getUserById = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = await Users.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        message: "Utilisateur introuvable",
+        status: false,
+      });
+    }
+    res
+      .status(200)
+      .json({ data: user, status: true, message: "Recuperation reussie" });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "Une erreur s'est produite", status: false });
+  }
+};
