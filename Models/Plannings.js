@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 
 const planningSchema = new mongoose.Schema({
-  Jour: {
+  jour: {
     type: String,
     required: true,
   },
-  Heure: {
-    type: Date,
+  heure: {
+    type: String,
     required: true,
   },
-  Lieu: {
+  lieu: {
     type: String,
     required: true,
   },

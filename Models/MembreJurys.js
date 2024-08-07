@@ -15,7 +15,7 @@ const MembreJurysSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  email: {
+  dateNaissance: {
     type: String,
     required: true,
   },

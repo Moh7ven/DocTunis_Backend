@@ -1,11 +1,11 @@
-import Realisateurs from "../Models/Realisateurs.js";
+import Producteurs from "../Models/Producteurs.js";
 import Users from "../Models/Users.js";
 
-export const createRealisateurs = async (req, res) => {
+export const createProducteurs = async (req, res) => {
   try {
     const { code, nom, prenom, dateNaissance } = req.body;
     const { userId } = req.auth;
-    const realisateur = new Realisateurs({ code, nom, prenom, dateNaissance });
+    const producteur = new Producteurs({ code, nom, prenom, dateNaissance });
 
     if (!code || !nom || !prenom || !dateNaissance) {
       return res.status(400).json({
@@ -30,18 +30,18 @@ export const createRealisateurs = async (req, res) => {
       });
     }
 
-    const rea = await Realisateurs.findOne({ code });
-    if (rea) {
+    const prod = await Producteurs.findOne({ code });
+    if (prod) {
       return res.status(400).json({
         message: "Code d'utilisateur existe deja",
         status: false,
       });
     }
 
-    const reaSave = await realisateur.save();
+    const prodSave = await producteur.save();
     res.status(201).json({
-      message: "Realisateur creer avec succes",
-      data: reaSave,
+      message: "Producteur creer avec succes",
+      data: prodSave,
       status: true,
     });
   } catch (error) {
@@ -53,10 +53,10 @@ export const createRealisateurs = async (req, res) => {
   }
 };
 
-export const getAllRealisateurs = async (req, res) => {
+export const getAllProducteurs = async (req, res) => {
   try {
     const { userId } = req.auth;
-    const realisateurs = await Realisateurs.find();
+    const producteurs = await Producteurs.find();
 
     const verifUser = await Users.findById(userId);
     if (!verifUser) {
@@ -75,43 +75,43 @@ export const getAllRealisateurs = async (req, res) => {
 
     res
       .status(200)
-      .json({ realisateurs, message: "Realisateurs récupérés", status: true });
+      .json({ producteurs, message: "Producteurs récupérés", status: true });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Une erreur est survenue", status: false });
   }
 };
 
-export const getOneRealisateurs = async (req, res) => {
+export const getOneProducteurs = async (req, res) => {
   try {
-    const { realisateurId } = req.params;
-    const realisateur = await Realisateurs.findById(realisateurId);
+    const { producteurId } = req.params;
+    const producteur = await Producteurs.findById(producteurId);
 
-    if (!realisateur) {
+    if (!producteur) {
       return res.status(404).json({
-        message: "realisateur introuvable",
+        message: "Producteur introuvable",
         status: false,
       });
     }
-    res.status(200).json({ data: realisateur, status: true });
+    res.status(200).json({ data: producteur, status: true });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Une erreur est survenue", status: false });
   }
 };
 
-export const updateRealisateurs = async (req, res) => {
+export const updateProducteurs = async (req, res) => {
   try {
     const { userId } = req.auth;
-    const { realisateurId } = req.params;
+    const { producteurId } = req.params;
     const { code, nom, prenom, dateNaissance } = req.body;
-    console.log(realisateurId);
+    console.log(producteurId);
 
-    const realisateur = await Realisateurs.findById(realisateurId);
+    const producteur = await Producteurs.findById(producteurId);
 
-    if (!realisateur) {
+    if (!producteur) {
       return res.status(404).json({
-        message: "Realisateur introuvable",
+        message: "Producteur introuvable",
         status: false,
       });
     }
@@ -135,22 +135,28 @@ export const updateRealisateurs = async (req, res) => {
       });
     }
 
-    const reaUpdate = await Realisateurs.findByIdAndUpdate(realisateurId, {
-      code,
-      nom,
-      prenom,
-      dateNaissance,
-    });
+    const reaUpdate = await Producteurs.findByIdAndUpdate(
+      producteurId,
+      {
+        code,
+        nom,
+        prenom,
+        dateNaissance,
+      },
+      {
+        new: true,
+      }
+    );
 
     if (!reaUpdate) {
       return res.status(404).json({
-        message: "Realisateur introuvable",
+        message: "Producteur introuvable",
         status: false,
       });
     }
 
     res.status(200).json({
-      message: "Realisateur mis a jour",
+      message: "Producteur mis a jour",
       status: true,
       data: reaUpdate,
     });
@@ -164,14 +170,14 @@ export const updateRealisateurs = async (req, res) => {
   }
 };
 
-export const deleteRealisateurs = async (req, res) => {
+export const deleteProducteurs = async (req, res) => {
   try {
     const { userId } = req.auth;
-    const { realisateurId } = req.params;
-    const realisateur = await Realisateurs.findById(realisateurId);
-    if (!realisateur) {
+    const { producteursId } = req.params;
+    const producteurs = await Producteurs.findById(producteursId);
+    if (!producteurs) {
       return res.status(404).json({
-        message: "Realisateur introuvable",
+        message: "Producteur introuvable",
         status: false,
       });
     }
@@ -188,9 +194,9 @@ export const deleteRealisateurs = async (req, res) => {
         status: false,
       });
     }
-    const reaDelete = await Realisateurs.findByIdAndDelete(realisateurId);
+    const reaDelete = await Producteurs.findByIdAndDelete(producteursId);
     res.status(200).json({
-      message: "Realisateur supprime",
+      message: "Producteur supprime",
       status: true,
       data: reaDelete,
     });
