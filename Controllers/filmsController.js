@@ -69,7 +69,9 @@ export const getAllFilms = async (req, res) => {
       .populate("realisateur")
       .populate("producteur")
       .populate("note");
-    res.status(200).json(films);
+    res
+      .status(200)
+      .json({ data: films, status: true, message: "Liste des films" });
   } catch (error) {
     console.error(error);
     res.status(404).json({ message: error.message });

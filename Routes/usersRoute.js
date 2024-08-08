@@ -23,8 +23,8 @@ router.post("/login", upload.any(), login);
 
 router.get("/get-user-by-id/:userId", upload.any(), getUserById);
 
-router.delete("/delete-user/:userId", upload.any(), deleteUser);
-
 router.put("/update-user/:userId", upload.any(), updateUser);
+
+router.delete("/delete-user/:userId", upload.any(), deleteUser);
 
 export default router;
