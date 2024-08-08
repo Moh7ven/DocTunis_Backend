@@ -66,7 +66,7 @@ export const getAllProducteurs = async (req, res) => {
       });
     }
 
-    if (verifUser.role !== "RespInspection" && verifUser.role !== "Admin") {
+    if (verifUser.role !== "RespInspection" && verifUser.role !== "admin") {
       return res.status(403).json({
         message: "Vous n'avez pas les autorisations requises",
         status: false,
@@ -122,7 +122,7 @@ export const updateProducteurs = async (req, res) => {
         status: false,
       });
     }
-    if (verifUser.role !== "RespInspection" && verifUser.role !== "Admin") {
+    if (verifUser.role !== "RespInspection" && verifUser.role !== "admin") {
       return res.status(403).json({
         message: "Vous n'avez pas les autorisations requises",
         status: false,
@@ -188,7 +188,7 @@ export const deleteProducteurs = async (req, res) => {
         status: false,
       });
     }
-    if (verifUser.role !== "RespInspection" && verifUser.role !== "Admin") {
+    if (verifUser.role !== "RespInspection" && verifUser.role !== "admin") {
       return res.status(403).json({
         message: "Vous n'avez pas les autorisations requises",
         status: false,
