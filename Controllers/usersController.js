@@ -157,3 +157,55 @@ export const getUserById = async (req, res) => {
       .json({ message: "Une erreur s'est produite", status: false });
   }
 };
+
+export const deleteUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = await Users.findByIdAndDelete(userId);
+    if (!user) {
+      return res.status(404).json({
+        message: "Utilisateur introuvable",
+        status: false,
+      });
+    }
+    res
+      .status(200)
+      .json({ data: user, status: true, message: "Suppression reussie" });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "Une erreur s'est produite", status: false });
+  }
+};
+
+export const updateUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { nom, prenom, code, role } = req.body;
+    const user = await Users.findByIdAndUpdate(
+      userId,
+      {
+        nom,
+        prenom,
+        code,
+        role,
+      },
+      { new: true }
+    );
+    if (!user) {
+      return res.status(404).json({
+        message: "Utilisateur introuvable",
+        status: false,
+      });
+    }
+    res
+      .status(200)
+      .json({ data: user, status: true, message: "Modification reussie" });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "Une erreur s'est produite", status: false });
+  }
+};
