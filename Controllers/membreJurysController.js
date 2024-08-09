@@ -176,3 +176,73 @@ export const getMembreJuryConnected = async (req, res) => {
     });
   }
 };
+
+export const updateMembreJurys = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { userId } = req.auth;
+    const verifUser = await Users.findById(userId);
+    if (!verifUser) {
+      return res.status(404).json({
+        message: "Utilisateur introuvable",
+        status: false,
+      });
+    }
+    if (verifUser.role !== "admin") {
+      return res.status(403).json({
+        message: "Vous n'avez pas les autorisations requises",
+        status: false,
+      });
+    }
+    const membreJurys = await MembreJurys.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    if (!membreJurys) {
+      return res.status(404).json({
+        message: "Membre non existant",
+        status: false,
+      });
+    }
+    res.status(200).json({
+      data: membreJurys,
+      message: "Membre mis à jour avec succes",
+      status: true,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message, status: false });
+  }
+};
+
+export const deleteMembreJurys = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { userId } = req.auth;
+    const verifUser = await Users.findById(userId);
+    if (!verifUser) {
+      return res.status(404).json({
+        message: "Utilisateur introuvable",
+        status: false,
+      });
+    }
+    if (verifUser.role !== "admin") {
+      return res.status(403).json({
+        message: "Vous n'avez pas les autorisations requises",
+        status: false,
+      });
+    }
+    const membreJurys = await MembreJurys.findByIdAndDelete(id);
+    if (!membreJurys) {
+      return res.status(404).json({
+        message: "Membre non existant",
+        status: false,
+      });
+    }
+    res.status(200).json({
+      data: membreJurys,
+      message: "Membre supprimé avec succes",
+      status: true,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message, status: false });
+  }
+};

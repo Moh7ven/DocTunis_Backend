@@ -3,10 +3,12 @@ import multer from "multer";
 import authUsers from "../Middlewares/authUsers.js";
 import {
   createMembreJurys,
+  deleteMembreJurys,
   getAllMembreJurys,
   getMembreJuryConnected,
   getOneMembreJurys,
   loginMembreJurys,
+  updateMembreJurys,
 } from "../Controllers/membreJurysController.js";
 
 const upload = multer();
@@ -30,6 +32,20 @@ router.get(
   upload.any(),
   authUsers,
   getMembreJuryConnected
+);
+
+router.put(
+  "/update-membre-jurys/:id",
+  upload.any(),
+  authUsers,
+  updateMembreJurys
+);
+
+router.delete(
+  "/delete-membre-jurys/:id",
+  upload.any(),
+  authUsers,
+  deleteMembreJurys
 );
 
 export default router;
